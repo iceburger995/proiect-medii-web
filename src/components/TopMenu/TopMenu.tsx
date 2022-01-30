@@ -1,19 +1,17 @@
-import { AppBar, Grid, Toolbar } from '@mui/material';
-import React, { useRef } from 'react';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { AppBar, Grid, Toolbar, Button } from '@mui/material';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Logo from 'assets/logo.png';
+import { logout } from 'state/Authentication/actions';
 import { useAuth } from 'state/Authentication/useAuthContext';
-import { useLanguage } from 'state/Language/useLanguage';
 
 import { useTopMenuStyles } from './styles';
 
 export const TopMenu: React.FunctionComponent = () => {
-	const topMenuRef = useRef<HTMLDivElement>();
 	const classes = useTopMenuStyles();
 	const { formatMessage } = useIntl();
-
-	const { changeLanguage } = useLanguage();
 
 	const { dispatch, state } = useAuth();
 
@@ -30,6 +28,13 @@ export const TopMenu: React.FunctionComponent = () => {
 					<Grid item xs={4}></Grid>
 					<Grid item xs={4} className={classes.logoWrapper}>
 						<img src={Logo} alt="Logo" />
+					</Grid>
+					<Grid item xs={4} className={classes.rightSide}>
+						{state.isAuthenticated && (
+							<Button onClick={() => logout(dispatch)}>
+								<LogoutIcon />
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</Toolbar>

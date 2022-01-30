@@ -24,11 +24,6 @@ export const NAVIGATION_SECTIONS: NavItem[] = [
 		title: <FormattedMessage id="home__title" />,
 	},
 	{
-		id: 'profile',
-		url: '/profile',
-		title: <FormattedMessage id="profile__title" />,
-	},
-	{
 		id: 'users',
 		url: '/users',
 		title: <FormattedMessage id="users__title" />,

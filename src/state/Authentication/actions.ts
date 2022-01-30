@@ -13,7 +13,6 @@ export async function loginUser(
 		const response = await requestLogin(loginPayload);
 
 		if (response) {
-			console.log(response);
 			const { token, ...user } = response;
 
 			dispatch({ type: ActionType.LOGIN_SUCCESS, payload: { token, user } });

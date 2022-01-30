@@ -50,10 +50,7 @@ const getFormattedBody = (body?: unknown, headers: HeadersType = {}): any => {
 };
 
 const getFormattedResponse = (response: Response): Promise<any> | undefined => {
-	console.log('res', response);
 	const formattedContentTypeHeader = response.headers.get('content-type')?.split(';')[0];
-
-	console.log(formattedContentTypeHeader);
 
 	switch (formattedContentTypeHeader) {
 		case ContentType.JSON:
@@ -84,6 +81,8 @@ export const fetchWrapper = async <T = unknown>(
 	if (config.headers['Content-Type'] === ContentType.FORM_DATA) {
 		delete config.headers['Content-Type'];
 	}
+
+	console.log(config, endpoint);
 
 	const response: any = await fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config);
 

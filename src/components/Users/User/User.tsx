@@ -26,7 +26,6 @@ export const User: React.FunctionComponent = (): JSX.Element => {
 		register,
 		handleSubmit,
 		reset,
-		control,
 		formState: { errors },
 	} = useForm<RegisterUserDTO>();
 	const onSubmit = handleSubmit(async (data) => {
@@ -58,7 +57,6 @@ export const User: React.FunctionComponent = (): JSX.Element => {
 					const response = await getUser(id);
 
 					reset(response);
-					// setUser(response);
 				} catch (e: any) {
 					if (e.status === 401) {
 						push('/login');
@@ -70,25 +68,6 @@ export const User: React.FunctionComponent = (): JSX.Element => {
 			fetchUser();
 		}
 	}, []);
-
-	const submitEdit = async (): Promise<void> => {
-		try {
-			await updateUser(user as UserDTO);
-			push('/users');
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const registerUser = async (): Promise<void> => {
-		try {
-			const registeredUser = await createUser(user as RegisterUserDTO);
-
-			console.log(registeredUser);
-		} catch (error) {
-			console.error(error);
-		}
-	};
 
 	if (!Object.keys(user)) return <Loading />;
 

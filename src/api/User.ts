@@ -23,3 +23,6 @@ export const createUser = (body: RegisterUserDTO): Promise<UserDTO> =>
 
 export const updateUser = (body: UserDTO): Promise<UserDTO> =>
 	fetchWrapper<UserDTO>(`${PATH}/${Number(body.id)}`, { method: RequestMethod.PUT, body });
+
+export const deleteUser = (body: UserDTO): Promise<UserDTO> =>
+	fetchWrapper<UserDTO>(`${PATH}/${Number(body.id)}`, { method: RequestMethod.DELETE, body });

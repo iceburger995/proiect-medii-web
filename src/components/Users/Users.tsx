@@ -3,7 +3,7 @@ import { DataGrid, GridColDef, GridCellParams, GridRowParams } from '@mui/x-data
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { getUsers, UserDTO } from 'api/User';
+import { deleteUser, getUsers, UserDTO } from 'api/User';
 import { Loading } from 'components';
 
 import { useUsersStyles } from './styles';
@@ -25,11 +25,11 @@ export const Users: React.FunctionComponent = (): JSX.Element => {
 					<Button
 						variant="outlined"
 						color="error"
-						onClick={(event) => {
+						onClick={async (event) => {
 							event.preventDefault();
 							event.stopPropagation();
 
-							console.log(`Deleted article ${row.id}`);
+							await deleteUserById(row);
 						}}
 					>
 						Delete
@@ -47,25 +47,38 @@ export const Users: React.FunctionComponent = (): JSX.Element => {
 		},
 	];
 
-	useEffect(() => {
-		const fetchUsers = async (): Promise<void> => {
-			try {
-				const response = await getUsers();
+	const fetchUsers = async (): Promise<void> => {
+		try {
+			const response = await getUsers();
 
-				setUsers(response);
-			} catch (e: any) {
-				if (e.status === 401) {
-					push('/login');
-				}
-				console.error(e);
+			setUsers(response);
+		} catch (e: any) {
+			if (e.status === 401) {
+				push('/login');
 			}
-		};
+			console.error(e);
+		}
+	};
 
+	useEffect(() => {
 		fetchUsers();
 	}, []);
 
+	const deleteUserById = async (row: UserDTO): Promise<void> => {
+		if (confirm('Are you sure you want to delete this user?')) {
+			try {
+				await deleteUser(row);
+
+				await fetchUsers();
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		return;
+	};
+
 	const handleRowClick = ({ row }: GridRowParams): void => {
-		console.log(row);
 		push(`users/${row.id}`);
 	};
 

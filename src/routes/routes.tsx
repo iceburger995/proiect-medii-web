@@ -4,7 +4,6 @@ import { lazyImport } from 'helpers/lazyLoad';
 export const LOGIN = '/login';
 export const HOME = '/';
 export const NOT_FOUND = '/not-found';
-export const PROFILE = '/profile';
 export const USERS = '/users';
 export const USER = '/users/:id';
 
@@ -13,10 +12,6 @@ const { Login } = lazyImport(() => import('components/Login/Login'), 'Login');
 const { Home } = lazyImport(() => import('components/Home/Home'), 'Home');
 const { Users } = lazyImport(() => import('components/Users/Users'), 'Users');
 const { User } = lazyImport(() => import('components/Users/User/User'), 'User');
-const { UnderConstruction } = lazyImport(
-	() => import('components/UnderConstruction/UnderConstruction'),
-	'UnderConstruction'
-);
 
 export const routes: Array<RouteProps> = [
 	{
@@ -35,12 +30,6 @@ export const routes: Array<RouteProps> = [
 		path: NOT_FOUND,
 		exact: true,
 		component: NotFound,
-		isPrivate: false,
-	},
-	{
-		path: PROFILE,
-		exact: true,
-		component: UnderConstruction,
 		isPrivate: false,
 	},
 	{
