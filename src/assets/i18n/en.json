@@ -18,6 +18,7 @@
 	"not-found__sub-header": "I don't think you should be here...",
 	"label__topmenu_header": "Top Menu Header",
 	"home__title": "Home",
+	"users__title": "Users",
 	"profile__title": "Profile",
 	"field-validation_enum": "One of: {enum}",
 	"field-validation_required": "Required",

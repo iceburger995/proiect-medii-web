@@ -39,10 +39,7 @@ const getFormattedBody = (body?: unknown, headers: HeadersType = {}): any => {
 			case ContentType.FORM_URL_ENCODED:
 				return new URLSearchParams(body as Record<string, string>);
 			case ContentType.FORM_DATA: {
-				console.log('formBody', body);
-
 				return body;
-				// return objectToFormData(body as Record<string, string>);
 			}
 			default:
 				return body;
@@ -53,7 +50,10 @@ const getFormattedBody = (body?: unknown, headers: HeadersType = {}): any => {
 };
 
 const getFormattedResponse = (response: Response): Promise<any> | undefined => {
+	console.log('res', response);
 	const formattedContentTypeHeader = response.headers.get('content-type')?.split(';')[0];
+
+	console.log(formattedContentTypeHeader);
 
 	switch (formattedContentTypeHeader) {
 		case ContentType.JSON:
@@ -81,17 +81,15 @@ export const fetchWrapper = async <T = unknown>(
 		body: getFormattedBody(body, formattedHeaders),
 	};
 
-	console.log('cofnig', config);
-
 	if (config.headers['Content-Type'] === ContentType.FORM_DATA) {
 		delete config.headers['Content-Type'];
 	}
 
-	const response = await fetch(`${process.env.REACT_APP_API_URL}/api${endpoint}`, config);
+	const response: any = await fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config);
 
 	if (response.ok) {
 		return getFormattedResponse(response);
 	} else {
-		throw await getFormattedResponse(response);
+		throw response;
 	}
 };

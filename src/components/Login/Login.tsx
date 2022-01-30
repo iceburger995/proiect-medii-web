@@ -9,7 +9,7 @@ import { useAuth } from 'state/Authentication/useAuthContext';
 import { useLoginStyles } from './styles';
 
 interface FormType {
-	email: string;
+	username: string;
 	password: string;
 }
 
@@ -18,7 +18,7 @@ export const Login: React.FunctionComponent = (): JSX.Element => {
 	const { formatMessage } = useIntl();
 
 	const [form, setForm] = useState<FormType>({
-		email: '',
+		username: '',
 		password: '',
 	});
 	const { dispatch, state } = useAuth();
@@ -50,9 +50,9 @@ export const Login: React.FunctionComponent = (): JSX.Element => {
 				</Grid>
 				<Grid item xs={8}>
 					<TextField
-						id="email-input"
-						name="email"
-						label={formatMessage({ id: 'common__email' })}
+						id="username-input"
+						name="username"
+						label={formatMessage({ id: 'common__username' })}
 						variant="outlined"
 						onChange={(e) => handleInputs(e)}
 					/>

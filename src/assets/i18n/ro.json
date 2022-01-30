@@ -18,6 +18,7 @@
 	"not-found__sub-header": "Nu cred că ar trebui să fiți aici...",
 	"label__topmenu_header": "Top Menu Header",
 	"home__title": "Acasă",
+	"users__title": "Utilizatori",
 	"profile__title": "Profil",
 	"field-validation_enum": "Unul dintre: {enum}",
 	"field-validation_required": "Necesar",

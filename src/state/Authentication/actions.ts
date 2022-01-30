@@ -13,14 +13,17 @@ export async function loginUser(
 		const response = await requestLogin(loginPayload);
 
 		if (response) {
-			dispatch({ type: ActionType.LOGIN_SUCCESS, payload: { token: response.access_token, user: response.user } });
-			localStorage.setItem('access_token', JSON.stringify(response.access_token));
-			localStorage.setItem('user', JSON.stringify(response.user));
+			console.log(response);
+			const { token, ...user } = response;
+
+			dispatch({ type: ActionType.LOGIN_SUCCESS, payload: { token, user } });
+			localStorage.setItem('access_token', JSON.stringify(token));
+			localStorage.setItem('user', JSON.stringify(user));
 
 			return response;
 		}
 	} catch (error) {
-		console.log('error', error);
+		console.error('error', error);
 		dispatch({ type: ActionType.LOGIN_ERROR, payload: { error: error as any } });
 	}
 }

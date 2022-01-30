@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-import { UserDTO } from 'api/Login';
+import { UserDTO } from 'api/User';
 import { ActionMap } from 'state/types/ActionMap';
 
 export interface AuthInitialState {

@@ -1,4 +1,4 @@
-import { UserDTO } from 'api/Login';
+import { UserDTO } from 'api/User';
 
 import { ActionType, AuthInitialState, AuthActions } from './types';
 
