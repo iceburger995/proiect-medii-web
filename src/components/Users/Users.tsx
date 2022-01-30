@@ -37,7 +37,6 @@ export const Users: React.FunctionComponent = (): JSX.Element => {
 				</>
 			),
 		},
-		{ field: 'id', headerName: 'ID', width: 70 },
 		{ field: 'firstName', headerName: 'First name', width: 130 },
 		{ field: 'lastName', headerName: 'Last name', width: 130 },
 		{
@@ -66,13 +65,17 @@ export const Users: React.FunctionComponent = (): JSX.Element => {
 	}, []);
 
 	const handleRowClick = ({ row }: GridRowParams): void => {
-		push(`${Users}/${row.id}`);
+		console.log(row);
+		push(`users/${row.id}`);
 	};
 
 	if (!users.length) return <Loading />;
 
 	return (
 		<Container className={classes.tableContainer}>
+			<Button variant="outlined" onClick={() => push('/users/new')}>
+				Add User
+			</Button>
 			<DataGrid
 				onRowClick={handleRowClick}
 				disableColumnMenu

@@ -8,3 +8,4 @@ export * from './SideBar/SideBar';
 export * from './ThemeWrapper/ThemeWrapper';
 export * from './UnderConstruction/UnderConstruction';
 export * from './Users/Users';
+export * from './Users/User/User';
